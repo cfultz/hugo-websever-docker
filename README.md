@@ -1,4 +1,4 @@
-# Hugo nginx Docker
+# Hugo Webserver in  Docker
 
 This ``Dockerfile`` was created to host my static [Hugo](https://gohugo.io) website over at [CFultz.pro](https://cfultz.pro) to be a proof of concept that I could do it. 
 
@@ -12,7 +12,7 @@ I have attached my ``deploy.sh`` that I used as well to create my site, build th
 In your Hugo website directory, process the following:
 
 ```
-git clone https://github.com/cfultz/hugo-nginx-docker.git
+git clone https://github.com/cfultz/hugo-webserver-docker.git
 chmod +x deploy.sh
 ./deploy.sh
 ```
@@ -24,9 +24,9 @@ chmod +x deploy.sh
 This will pull the latest pre-compiled container from [Docker Hub](https://hub.docker.com/r/cfultz/hugo-nginx) In your Hugo website directory, process the following:
 
 ```
-git clone https://github.com/cfultz/hugo-nginx-docker.git
-chmod +x deploy-hub.sh
-./deploy-hub.sh
+rm -rf /home/user/hugo/public && docker container stop hugo
+
+hugo && docker run -it --restart=always -d -p 80:80 --name hugo-webserver cfultz/hugo-webserver:apache
 ```
 
 ## License
